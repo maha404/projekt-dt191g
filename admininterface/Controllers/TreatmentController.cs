@@ -33,7 +33,7 @@ namespace admininterface.Controllers
             var treatment = from m in _context.Treatments.Include(b => b.TreatmentType)
                             select m;
 
-            if(!String.IsNullOrEmpty(SearchString))
+            if(!string.IsNullOrEmpty(SearchString))
             {
                 SearchString = SearchString.Trim().ToLower();
                 treatment = treatment.Where(s => s.Name!.ToLower().Contains(SearchString));
