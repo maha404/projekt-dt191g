@@ -10,7 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    public DbSet<TreatmentModel>? Treatments { get; set; }
-    public DbSet<TreatmentTypeModel>? TreatmentTypes { get; set; }
-    public DbSet<BookingModel>? Bookings { get; set; }
+    public DbSet<TreatmentModel> Treatments { get; set; }
+    public DbSet<TreatmentTypeModel> TreatmentTypes { get; set; }
+    public DbSet<BookingModel> Bookings { get; set; }
 }
