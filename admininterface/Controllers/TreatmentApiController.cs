@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using admininterface.Data;
+using admininterface.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,20 @@ namespace MyApp.Namespace
 
             return Ok(await _context.Treatments.ToListAsync());
         }
-        
+
+        // GET api/treatments/id
+        // Get specific treatment
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TreatmentModel>> GetOneTreatment(int id)
+        {
+            var treatment = await _context.Treatments.FindAsync(id);
+
+            if(treatment == null) 
+            {
+                return NotFound();
+            }
+
+            return treatment;
+        }
     }
 }
