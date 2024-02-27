@@ -1,11 +1,10 @@
-using System.Data.Entity;
 using admininterface.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyApp.Namespace
 {
-    [Route("api/treatmenttype")]
+    [Route("api/treatmenttypes")]
     [ApiController]
     public class TreatmentTypeApiController : ControllerBase
     {
