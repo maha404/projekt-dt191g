@@ -1,12 +1,10 @@
 @model admininterface.Models.TreatmentTypeModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Ändra behandlingstyp";
 }
 
-<h1>Edit</h1>
-
-<h4>TreatmentTypeModel</h4>
+<h1>Ändra</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,13 +17,13 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka</a>
 </div>
 
