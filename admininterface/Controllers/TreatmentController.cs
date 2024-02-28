@@ -21,28 +21,25 @@ namespace admininterface.Controllers
             _context = context;
         }
 
-        [Route("/hanterabehandling")]
         // GET: Treatment
         public async Task<IActionResult> Index(string SearchString)
         {
-            if(_context.Treatments == null)
+             if(_context.Treatments == null)
             {
                 return Problem("TreatmentContext.Treatment is null");
             }
 
             var treatment = from m in _context.Treatments.Include(b => b.TreatmentType)
                             select m;
-
+            
             if(!string.IsNullOrEmpty(SearchString))
             {
                 SearchString = SearchString.Trim().ToLower();
                 treatment = treatment.Where(s => s.Name!.ToLower().Contains(SearchString));
             }
-
             return View(await treatment.ToListAsync());
         }
 
-        [Route("/hanterabehandling/detaljer/{id}")]
         // GET: Treatment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -62,7 +59,6 @@ namespace admininterface.Controllers
             return View(treatmentModel);
         }
 
-        [Route("/hanterabehandling/lagg_till")]
         // GET: Treatment/Create
         public IActionResult Create()
         {
@@ -85,7 +81,6 @@ namespace admininterface.Controllers
             return View(treatmentModel);
         }
 
-        [Route("/hanterabehandling/andra/{id}")]
         // GET: Treatment/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -137,7 +132,6 @@ namespace admininterface.Controllers
             return View(treatmentModel);
         }
 
-        [Route("/hanterabehandling/radera/{id}")]
         // GET: Treatment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

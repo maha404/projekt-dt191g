@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using admininterface.Data;
 using admininterface.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace admininterface.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class TreatmentTypeController : Controller
     {
         private readonly ApplicationDbContext _context;
