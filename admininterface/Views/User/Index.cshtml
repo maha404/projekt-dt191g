@@ -1,0 +1,34 @@
+@using Microsoft.AspNetCore.Identity
+@using admininterface.Models
+
+@{
+    ViewData["Title"] = "Hantera användare";
+}
+
+<h1>Lista över användare</h1>
+<p>
+    <a asp-area="Identity" asp-page="/Account/Register">Registrera ny användare</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Användare</th>
+            <th>Hantera</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>
+                <td>@user.Email</td>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@user.Id">Radera</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
