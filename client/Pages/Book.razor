@@ -1,0 +1,259 @@
+@page "/tidsbokning/boka"
+@inject NavigationManager NavManager
+@inject HttpClient http
+@using System.Globalization
+
+
+@if(showModal) 
+{
+    <CustomModal Title = "Bokad" Message=@($"Bokningen har genomförts. Din boknings-ID är: {bookingId}") OnClose="CloseModal">
+        
+    </CustomModal>
+}
+
+<section>
+    @if(treatment != null)
+    {
+        <article>
+        <h2>Bokning</h2>
+        <p>@treatment.Name</p>
+        <p>@treatment.Description</p>
+        <p>@treatment.Price kronor</p>
+        </article>
+    }
+    <article>
+        <h3>Din bokning</h3>
+        @if(selectedDate != DateTime.MinValue && !string.IsNullOrEmpty(selectedTime))
+        {
+            <p>Datum för bokningen: @selectedDate.ToString("yyyy-MM-dd") @selectedTime </p>
+        }
+        
+        <input @bind="CustomerName" type="text" placeholder="Namn">
+        <input @bind="CustomerPhone" type="text" placeholder="Telefonnummer">
+        <br>
+        <br>
+        <p>@ErrorMessage</p>
+        <button @onclick="BookTreatment">Boka</button>
+        <button>Ångra</button>
+    </article>
+    
+</section>
+<br>
+
+<section>
+    <h3>Välj en tid:</h3>
+</section>
+
+<button @onclick="PreviousWeek" disabled="@IsCurrentWeek">Förgående vecka</button>
+<button @onclick="NextWeek">Nästa vecka</button>
+
+@if (weekDays != null)
+{
+    <h4>Veckonummer: @selectedWeek</h4>
+    <h4>Veckodagar:</h4>
+    <ul>
+        @foreach (var day in weekDays)
+        {
+            <li>@day.ToString("yyyy-MM-dd")</li>
+            @foreach (var time in availableTimes)
+            {
+            // Check if the time is booked for the selected date
+            var isBooked = bookedTimes.Any(b => b.DateTime == DateTime.Parse($"{day:yyyy-MM-dd}T{time}:00"));
+            
+            // Only show the button if the time is not booked
+            @if (!isBooked)
+            {
+                <button @onclick="() => SelectTime(time, day)">@time</button>
+            }
+            }
+        }
+        
+    </ul>
+}
+
+
+@code {
+    private bool showModal = false;
+    private bool IsCurrentWeek => selectedWeek == GetIso8601WeekNumber(DateTime.Now);
+
+    private Treatment treatment;
+    private string selectedTime;
+
+    private string ErrorMessage;
+
+    private DateTime selectedDate;
+    private List<string> availableTimes = new List<string> { "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "13:00", "13:30", "14:00", "14:30", "15:00"};
+
+    private int selectedWeek;
+    private int selectedYear = DateTime.Now.Year;
+    private DateTime[] weekDays;
+
+    // Användar info
+    private string CustomerName;
+    private string CustomerPhone;
+
+    private List<BookingModel> bookedTimes = new List<BookingModel>();
+
+    private int bookingId;
+
+    private void CloseModal()
+    {
+        showModal = false;
+    }
+
+    // Funktioner
+    private BookingModel bookingModel = new BookingModel();
+    private async Task BookTreatment()
+    {
+            try
+        {
+            // Sätt värden för bokningsmodellen
+            var queryString = new Uri(NavManager.Uri).Query;
+            var queryParams = System.Web.HttpUtility.ParseQueryString(queryString);
+            bookingModel.TreatmentId = int.Parse(queryParams["id"]);
+
+            string bookingDateTimeString = $"{selectedDate:yyy-MM-dd}T{selectedTime}:00";
+
+            bookingModel.DateTime = DateTime.Parse(bookingDateTimeString);
+            bookingModel.Name = CustomerName;
+            bookingModel.PhoneNumber = CustomerPhone;
+
+            if(CustomerName != null && CustomerPhone != null)
+            {
+              
+                // Gör en POST-request till api:t för booking
+                var response = await http.PostAsJsonAsync("http://localhost:5244/api/booking", bookingModel);
+
+                bookingId = await response.Content.ReadFromJsonAsync<int>();
+
+                // Visa modalen
+                showModal = true;
+                ErrorMessage = "";
+                
+            } else {
+                ErrorMessage = "Fälten får inte vara tomma!";
+            }
+             
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Vänligen välj en tid!";
+        }
+    }
+
+    private void PreviousWeek()
+    {
+        int currentWeek = GetIso8601WeekNumber(DateTime.Now);
+
+        if(selectedWeek > 1)
+        {
+            selectedWeek--;
+            weekDays = GetWeekDays(selectedYear, selectedWeek);
+        }
+
+    }
+
+    private void NextWeek()
+    {
+        selectedWeek++;
+        weekDays = GetWeekDays(selectedYear, selectedWeek);
+    }
+
+
+    DateTime[] GetWeekDays(int year, int weekNumber)
+    {
+        DateTime jan1 = new DateTime(year, 1, 1);
+        DateTime startOfWeek = jan1.AddDays((weekNumber - 1) * 7 - (int)jan1.DayOfWeek + (int)DayOfWeek.Monday);
+
+        DateTime[] days = new DateTime[7];
+        for (int i = 0; i < 7; i++)
+        {
+            days[i] = startOfWeek.AddDays(i);
+        }
+
+        return days;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        DateTime currentDate = DateTime.Now.Date;
+        selectedWeek = GetIso8601WeekNumber(currentDate);
+
+        weekDays = GetWeekDays(selectedYear, selectedWeek);
+
+        // Hämta behandlings-ID från query-string
+        var queryString = new Uri(NavManager.Uri).Query;
+        var queryParams = System.Web.HttpUtility.ParseQueryString(queryString);
+        var treatmentId = int.Parse(queryParams["id"]);
+
+        // Anropa API för att hämta behandlingsinformation baserat på ID
+        treatment = await http.GetFromJsonAsync<Treatment>($"http://localhost:5244/api/treatments/{treatmentId}");
+        
+        string formattedDate = selectedDate.ToString("yyyy-MM-dd");
+        try
+        {
+            bookedTimes = await http.GetFromJsonAsync<List<BookingModel>>($"http://localhost:5244/api/booking/{treatmentId}");
+        }
+         catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"HTTP Request Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        
+    }
+
+    private int GetIso8601WeekNumber(DateTime date)
+    {
+        // Ensure the current date is Monday of the current week
+        int daysToSubtract = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
+        DateTime mondayOfWeek = date.AddDays(-daysToSubtract).Date;
+
+        // Calculate the ISO 8601 week number
+        int isoWeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(mondayOfWeek, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+        // Check if the current date is in the last week of the previous year
+        if (isoWeekNumber == 1 && date.Month == 12)
+        {
+            isoWeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        return isoWeekNumber;
+    }
+
+    void SelectTime(string time, System.DateTime day)
+    {
+        selectedTime = time;
+        selectedDate = day;
+    }
+
+
+
+    public class Treatment
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Price { get; set; }
+        public int TreatmentTypeId { get; set; }
+    }
+
+    public class BookingModel
+    {
+        public int Id { get; set; }
+        public int TreatmentId {get; set;}
+        public DateTime DateTime { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool Status { get; set; } = false;
+    }
+
+    public class BookingResponse 
+    {
+        public int BookingNumber {get; set;}
+    }
+    
+}
