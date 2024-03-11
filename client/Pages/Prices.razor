@@ -1,0 +1,42 @@
+@page "/priser"
+@inject HttpClient http
+
+<h2>Priser</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Behandling</th>
+            <th>Pris</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in treatment)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+    private Treatment[]? treatment;
+
+    protected override async Task OnInitializedAsync()
+    {
+        treatment = await http.GetFromJsonAsync<Treatment[]>("http://localhost:5244/api/treatments");
+    }
+
+    public class Treatment
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Price { get; set; }
+        public int TreatmentTypeId { get; set; }
+    }
+}

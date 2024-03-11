@@ -1,0 +1,99 @@
+@page "/tidsbokning"
+@inject HttpClient http
+@inject NavigationManager NavManager
+
+
+@if(showModal) 
+{
+    @foreach(var item in treatmentInfo)
+    {
+        <CustomModal Title=@item.Name Message=@($"ID: {item.Id}\nBeskrivning: {item.Description}\nPris: {item.Price} kr") OnClose="CloseModal"/>
+    }
+    
+}
+
+
+@if (treatmenttype != null)
+{
+    foreach (var type in treatmenttype) 
+    {
+        <div>
+            <button data-toggle="collapse" data-target="#@($"collapse-{type.Id}")" aria-expanded="false" aria-controls="@($"collapse-{type.Id}")">
+                <p>@type.Name</p>
+            </button>
+            <ul class="collapse" id="@($"collapse-{type.Id}")">
+                @foreach (var item in GetTreatmentByType(type.Id))
+                {
+                    <li>
+                        <strong>ID:</strong> @item.Id<br />
+                        <strong>Namn:</strong> @item.Name<br />
+                        <strong>Beskrivning:</strong> @item.Description<br />
+                        <button @onclick="() => BookTreatment(item.Id)">Boka</button>
+                        <button @onclick="() => Info(item.Id)">Mer info</button>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+}
+
+
+@code {
+
+    private bool showModal = false;
+    private Treatment[]? treatment;
+    private TreatmentType[]? treatmenttype;
+    private Treatment[]? treatmentInfo;
+
+    // Kör denna metod när komponenten laddas
+    protected override async Task OnInitializedAsync()
+    {
+        // Anropa API för att hämta behandlingar
+        treatment = await http.GetFromJsonAsync<Treatment[]>("http://localhost:5244/api/treatments");
+        treatmenttype = await http.GetFromJsonAsync<TreatmentType[]>("http://localhost:5244/api/treatmenttypes");
+    }
+
+    
+    // Metod för att filtrera behandlingar baserat på behandlingstyp
+    private IEnumerable<Treatment> GetTreatmentByType(int treatmentTypeId)
+    {
+        return treatment?.Where(t => t.TreatmentTypeId == treatmentTypeId) ?? Enumerable.Empty<Treatment>();
+    }
+
+    private void BookTreatment (int id)
+    {
+        // Skapa en query-string med behandlings-ID
+        var queryString = $"id={id}";
+
+        // Navigera till boka-sidan med query-string
+        NavManager.NavigateTo($"/tidsbokning/boka?{queryString}");
+    }
+
+   private async Task Info(int id)
+    {
+        treatmentInfo = new Treatment[] { await http.GetFromJsonAsync<Treatment>($"http://localhost:5244/api/treatments/{id}") };
+        showModal = true;
+    }
+
+
+    private void CloseModal()
+    {
+        showModal = false;
+    }
+
+    public class Treatment
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Price { get; set; }
+        public int TreatmentTypeId { get; set; }
+    }
+
+    public class TreatmentType
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+    }
+
+}
