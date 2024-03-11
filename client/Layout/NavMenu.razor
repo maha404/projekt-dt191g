@@ -1,13 +1,13 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@* <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">client</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-</div>
+</div> *@
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+@* <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -15,17 +15,93 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="tidsbokning">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Tidsbokning
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            <NavLink class="nav-link" href="avboka">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Avboka
             </NavLink>
         </div>
     </nav>
-</div>
+</div> *@
+
+<header>
+
+            <!-- Mobil-ikon för menyn -->
+            <div class="icon-container" id="menu-icon">
+                <!-- Logga -->
+                <img class="logo" src="../wwwroot/images/logo.png" alt="">
+                <i class="fa-solid fa-bars fa-lg" id="nav-icon"></i>
+            </div>
+            
+            <!-- Menyn Mobil-->
+            <div class="nav-container" id="nav">
+                <!-- Navigering -->
+                <nav class="nav-mobile">
+                    <ul class="nav-list-mobile">
+                        <li>
+                            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="tidsbokning">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Tidsbokning
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="priser">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Priser
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="avboka">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Avboka
+                            </NavLink>
+                        </li>
+                        <li><a href="#">Om oss</a></li>
+                    </ul>
+                    <!-- <button>Logga in</button> -->
+                </nav>
+            </div>
+            
+            <!-- Menyn Desktop-->
+            <div class="nav-desktop">
+                <img class="logo" src="images/logo.png" alt="">
+                <!-- Navigering -->
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li>
+                            <NavLink class="nav-link" href="tidsbokning">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Tidsbokning
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="priser">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Priser
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="avboka">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Avboka
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink class="nav-link" href="omoss">
+                                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Om oss
+                            </NavLink>
+                        </li>
+                    </ul>
+                    <!-- <button>Logga in</button> -->
+                </nav>
+            </div>
+      
+        <!-- Header bilden -->
+        <img class="header-img" src="images/header.png" alt="">
+
+    </header>
 
 @code {
     private bool collapseNavMenu = true;
