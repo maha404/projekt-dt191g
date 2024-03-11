@@ -18,21 +18,26 @@
     foreach (var type in treatmenttype) 
     {
         <div>
-            <button data-toggle="collapse" data-target="#@($"collapse-{type.Id}")" aria-expanded="false" aria-controls="@($"collapse-{type.Id}")">
+            <button class="collapse-btn" data-toggle="collapse" data-target="#@($"collapse-{type.Id}")" aria-expanded="false" aria-controls="@($"collapse-{type.Id}")">
                 <p>@type.Name</p>
             </button>
-            <ul class="collapse" id="@($"collapse-{type.Id}")">
+            <article class="collapse" id="@($"collapse-{type.Id}")">
                 @foreach (var item in GetTreatmentByType(type.Id))
                 {
-                    <li>
-                        <strong>ID:</strong> @item.Id<br />
-                        <strong>Namn:</strong> @item.Name<br />
-                        <strong>Beskrivning:</strong> @item.Description<br />
-                        <button @onclick="() => BookTreatment(item.Id)">Boka</button>
-                        <button @onclick="() => Info(item.Id)">Mer info</button>
-                    </li>
+                    <div class="collapse-contents">
+                        <div class="text-container">
+                            <p>@item.Name</p>
+                            <p>Pris - @item.Price</p>
+                        </div>
+                        <div class="btn-container">
+                            <div class="btns">
+                            <button class="contents-btn" @onclick="() => Info(item.Id)">Mer info</button>
+                            <button class="contents-btn" @onclick="() => BookTreatment(item.Id)">Boka</button>
+                            </div>
+                        </div>
+                    </div>
                 }
-            </ul>
+            </article>
         </div>
     }
 }
