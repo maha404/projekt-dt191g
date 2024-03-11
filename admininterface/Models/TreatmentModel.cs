@@ -13,6 +13,11 @@ public class TreatmentModel
     [Required(ErrorMessage = "Vänligen skriv en beskrivning!")]
     [Display(Name = "Beskrivning")]
     public string? Description { get; set; }
+
+    [Required(ErrorMessage = "Vänligen ange behandlingstiden!")]
+    [Display(Name = "Behandlingstid")]
+    public TimeSpan TreatmentTime { get; set; }
+
     [Required(ErrorMessage = "Vänligen ange ett pris!")]
     [Display(Name = "Pris")]
     public int Price { get; set; }
