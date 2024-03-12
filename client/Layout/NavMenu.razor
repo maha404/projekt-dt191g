@@ -1,14 +1,14 @@
 ﻿<header>
 
             <!-- Mobil-ikon för menyn -->
-            <div class="icon-container" id="menu-icon">
+            <div class="icon-container-mobile" id="menu-icon">
                 <!-- Logga -->
                 <img class="logo" src="images/logo.png" alt="">
-                <i class="fa-solid fa-bars fa-lg" id="nav-icon"></i>
+                <i @onclick="ToggleNavMenu" class="fa-solid fa-bars fa-lg" id="nav-icon"></i>
             </div>
             
             <!-- Menyn Mobil-->
-            <div class="nav-container" id="nav">
+            <div id="nav" class="some-section @NavMenuCssClass">
                 <!-- Navigering -->
                 <nav class="nav-mobile">
                     <ul class="nav-list-mobile">
@@ -34,7 +34,6 @@
                         </li>
                         <li><a href="#">Om oss</a></li>
                     </ul>
-                    <!-- <button>Logga in</button> -->
                 </nav>
             </div>
             
@@ -75,6 +74,7 @@
     </header>
 
 @code {
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
