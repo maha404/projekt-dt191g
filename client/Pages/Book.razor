@@ -6,64 +6,71 @@
 
 @if(showModal) 
 {
-    <CustomModal Title = "Bokad" Message=@($"Bokningen har genomförts. Din boknings-ID är: {bookingId}") OnClose="CloseModal">
-        
-    </CustomModal>
+    <div class="modals">
+        <CustomModal Title = "Bokad" Message=@($"Bokningen har genomförts. Din boknings-ID är: {bookingId}") OnClose="CloseModal"/>
+    </div>
 }
 
 <section>
     @if(treatment != null)
     {
         <article class="booking-text">
-        <h2>Bokning</h2>
-        <p>@treatment.Name</p>
-        <p>@treatment.Description</p>
-        <p>@treatment.Price kronor</p>
+            <h2>Bokning</h2>
+            <p>Namn på behandlignen: <br> @treatment.Name</p>
+            <p>Beskrivning: <br> @treatment.Description</p>
+            <p>Pris: <br> @treatment.Price kronor</p>
         </article>
     }
-    <article>
+    
+    <article class="booking-article">
         <h3>Din bokning</h3>
         @if(selectedDate != DateTime.MinValue && !string.IsNullOrEmpty(selectedTime))
         {
             <p>Datum och tid för bokningen: @selectedDate.ToString("yyyy-MM-dd") @selectedTime </p>
         }
-        
-        <input @bind="CustomerName" type="text" placeholder="Namn">
-        <input @bind="CustomerPhone" type="text" placeholder="Telefonnummer">
         <br>
+            <label for="name">Namn</label>
         <br>
-        <p>@ErrorMessage</p>
-        <button @onclick="BookTreatment">Boka</button>
-        <button>Ångra</button>
+            <input @bind="CustomerName" type="text" placeholder="Ditt namn" name="name" id="name">
+        <br>
+            <label for="phonenumber">Telefonnummer</label>
+        <br>
+            <input @bind="CustomerPhone" type="text" placeholder="Ditt telefonnummer" name="phonenumber" id="phonenumber">
+        <br>
+            <p>@ErrorMessage</p>
+            <button @onclick="BookTreatment" class="book-btn">Boka</button>
+            <button class="book-btn">Ångra</button>
     </article>
     
 </section>
 <br>
 
 
-
 <div class="booking-container">
 @if (weekDays != null)
 {
-    <h4>Vecka @selectedWeek</h4>
-    <button @onclick="PreviousWeek" disabled="@IsCurrentWeek">Förgående vecka</button>
-    <button @onclick="NextWeek">Nästa vecka</button>
+    
+    <div class="week-container">
+        <button @onclick="PreviousWeek" disabled="@IsCurrentWeek"><i class="fa-solid fa-chevron-left"></i></button>
+        <h4>Vecka @selectedWeek</h4>
+        <button @onclick="NextWeek"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
     
     <div class="time-container">
         @foreach (var day in weekDays)
         {
-            <div class="column">
-            <p>@day.ToString("MM/dd")</p>
+            <div class="column-container">
+            <p class="date-text">Datum: @day.ToString("MM/dd")</p>
             @foreach (var time in availableTimes)
             {
-            // Check if the time is booked for the selected date
-            var isBooked = bookedTimes.Any(b => b.DateTime == DateTime.Parse($"{day:yyyy-MM-dd}T{time}:00"));
-            
-            // Only show the button if the time is not booked
-            @if (!isBooked)
-            {
-                <button class="time-btn" @onclick="() => SelectTime(time, day)">@time</button>
-            }
+                // Check if the time is booked for the selected date
+                var isBooked = bookedTimes.Any(b => b.DateTime == DateTime.Parse($"{day:yyyy-MM-dd}T{time}:00"));
+                
+                // Only show the button if the time is not booked
+                @if (!isBooked)
+                {
+                    <button class="time-btn" @onclick="() => SelectTime(time, day)">@time</button>
+                }
             }
         </div>
         }
