@@ -34,7 +34,7 @@ body {
     display: none;
 }
 
-.icon-container {
+.icon-container-mobile {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -166,7 +166,7 @@ footer {
         flex-direction: column;
     }
 
-    .icon-container {
+    .icon-container-mobile {
         display: flex;
         column-gap: 65%;
     }
@@ -211,7 +211,7 @@ footer {
 @media screen and (min-width: 1000px) and (max-width: 1800px) {
 
     /* Header */
-    .icon-container, 
+    .icon-container-mobile, 
     .nav-container, 
     #nav {
         display: none !important;
@@ -304,6 +304,25 @@ footer {
 }
 
 @media screen and (min-width: 1800px) {
+
+    /* Header */
+    .icon-container-mobile, 
+    .nav-container, 
+    #nav {
+        display: none !important;
+    }
+
+    .logo {
+        width: 10%;
+    }
+
+    .nav-desktop {
+        display: flex;
+        align-items: center;
+        column-gap: 60%;
+        padding: 1% 0 1% 0;
+        margin: 0 0 0 2%;
+    }
 
     /* Main - startsida */
     main {
