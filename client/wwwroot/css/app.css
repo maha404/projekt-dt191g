@@ -104,12 +104,55 @@ a:visited {
     border: none;
     padding: 3% 9% 3% 9%;
     border-radius: 0.4rem;
+    font-size: small;
+}
+
+.text-container {
+    font-size: small;
 }
 
 /*Footer ----------------------------->*/
 footer {
     background-color: #AEC6CF;
     padding: 1%;
+}
+
+/*Modal ----------------------------->*/
+
+.modals {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    width: 90%; 
+    padding: 4%;
+    border-radius: 1rem 0 1rem 0;
+}
+
+.modal-title {
+    font-size: medium;
+}
+
+.modal-message {
+    font-size: small;
+    margin: 10% 0 10% 0;
+}
+
+.modal-btn {
+    border: none;
+    background-color: #AEC6CF;
+    padding: 3% 0 3% 0;
+    width: 50%;
+    font-size: small;
+    border-radius: 0.4rem;
 }
 
 
@@ -144,6 +187,24 @@ footer {
         padding: 2%;
     }
 
+    .contents-btn {
+        padding: 1% 4% 1% 4%;
+    }
+
+    .text-container, 
+    .contents-btn {
+        font-size: medium;
+    }
+
+    /*Modal*/
+    .modal-btn {
+        padding: 1% 0 1% 0;
+        width: 20%;
+    }
+
+    .modal-message {
+        margin: 3% 0 3% 0;
+    }
 }
 
 /* Större skärmar */
@@ -211,6 +272,34 @@ footer {
     .collapse-contents {
         padding: 2%;
     }
+
+    .contents-btn {
+        padding: 1% 4% 1% 4%;
+        margin-left: 9%;
+    }
+
+    /*Modal*/
+    .modal-btn {
+        padding: 1% 0 1% 0;
+        width: 20%;
+        font-size: medium;
+    }
+
+    .modal-content {
+        text-align: left;
+    }
+
+    .modal-title {
+        font-size: large;
+    }
+
+    .modal-message {
+        font-size: medium;
+    }
+
+    .modal-message {
+        margin: 3% 0 3% 0;
+    }
      
 }
 
@@ -275,5 +364,28 @@ footer {
         margin-left: 10%;
         padding: 0% 20% 0% 20%;
         height: 3rem;
+    }
+
+    /*Modal*/
+    .modal-btn {
+        padding: 1% 1% 1% 1%;
+        width: 10%;
+        font-size: medium;
+    }
+
+    .modal-content {
+        text-align: left;
+    }
+
+    .modal-title {
+        font-size: large;
+    }
+
+    .modal-message {
+        font-size: medium;
+    }
+
+    .modal-message {
+        margin: 3% 0 3% 0;
     }
 }

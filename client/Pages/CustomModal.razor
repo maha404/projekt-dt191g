@@ -1,7 +1,10 @@
 
-<h3>@Title</h3>
-<p>@Message</p>
-<button @onclick="CloseModal">Stäng</button>
+    <section class="modal-content">
+        <h3 class="modal-title">@Title</h3>
+        <p class="modal-message">@Message</p>
+        <button class="modal-btn" @onclick="CloseModal">Stäng</button>
+    </section>
+
 
 @code {
     [Parameter]

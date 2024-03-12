@@ -7,11 +7,12 @@
 {
     @foreach(var item in treatmentInfo)
     {
-        <CustomModal Title=@item.Name Message=@($"ID: {item.Id}\nBeskrivning: {item.Description}\nPris: {item.Price} kr") OnClose="CloseModal"/>
+        <div class="modals">
+            <CustomModal Title=@item.Name Message=@($"{item.Description}") OnClose="CloseModal"/>
+        </div>
     }
     
 }
-
 
 @if (treatmenttype != null)
 {
