@@ -11,6 +11,10 @@
     </div>
 }
 
+<div>
+    <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
+</div>
+
 <section>
     @if(treatment != null)
     {
@@ -103,6 +107,8 @@
     private List<BookingModel> bookedTimes = new List<BookingModel>();
 
     private int bookingId;
+
+    private List<BreadcrumbItem> NavItems1 { get; set; }
 
     private void CloseModal()
     {
@@ -218,6 +224,13 @@
         {
             Console.WriteLine($"An unexpected error occurred: {ex.Message}");
         }
+
+        NavItems1 = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem{ Text = "Startsidan", Href ="/" },
+            new BreadcrumbItem{ Text = "Tidsbokning", Href ="/tidsbokning"},
+            new BreadcrumbItem{ Text = "Boka", IsCurrentPage = true }
+        };
         
     }
 

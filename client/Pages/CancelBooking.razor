@@ -5,6 +5,10 @@
 
 <h2>Avboka</h2>
 
+<div>
+    <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
+</div>
+
 <input type="number" @bind="bookingId" placeholder="bokningsnummer">
 <input type="text" @bind="CustomerName">
 <input type="text" @bind="CustomerPhone">
@@ -21,7 +25,16 @@
     private string ErrorMessage;
     private string SuccessMessage;
     private BookingModel model = new BookingModel();
+    private List<BreadcrumbItem> NavItems1 { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        NavItems1 = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem{ Text = "Startsidan", Href ="/" },
+            new BreadcrumbItem{ Text = "Avboka", IsCurrentPage = true }
+        };
+    }
     private async Task Cancel()
     {
         try 

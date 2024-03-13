@@ -2,6 +2,9 @@
 @inject HttpClient http
 @inject NavigationManager NavManager
 
+<div>
+    <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
+</div>
 
 @if(showModal) 
 {
@@ -50,6 +53,7 @@
     private Treatment[]? treatment;
     private TreatmentType[]? treatmenttype;
     private Treatment[]? treatmentInfo;
+    private List<BreadcrumbItem> NavItems1 { get; set; }
 
     // Kör denna metod när komponenten laddas
     protected override async Task OnInitializedAsync()
@@ -57,6 +61,12 @@
         // Anropa API för att hämta behandlingar
         treatment = await http.GetFromJsonAsync<Treatment[]>("http://localhost:5244/api/treatments");
         treatmenttype = await http.GetFromJsonAsync<TreatmentType[]>("http://localhost:5244/api/treatmenttypes");
+        
+        NavItems1 = new List<BreadcrumbItem>
+        {
+            new BreadcrumbItem{ Text = "Startsidan", Href ="/" },
+            new BreadcrumbItem{ Text = "Tidsbokning", IsCurrentPage = true }
+        };
     }
 
     
