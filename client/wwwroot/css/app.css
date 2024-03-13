@@ -1,7 +1,9 @@
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    height: 200vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header -----------------------------> */
@@ -209,8 +211,7 @@ label {
 
 /*Footer ----------------------------->*/
 footer {
-    background-color: #AEC6CF;
-    padding: 1%;
+    margin-top: auto;
 }
 
 /*Modal ----------------------------->*/
