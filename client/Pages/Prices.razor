@@ -7,23 +7,25 @@
     <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
 </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Behandling</th>
-            <th>Pris</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var item in treatment)
-        {
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
+                <th>Behandling</th>
+                <th>Pris</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var item in treatment)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price kr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 @code {

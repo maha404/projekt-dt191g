@@ -107,7 +107,7 @@ a:visited {
     font-size: small;
 }
 
-/*Book*/
+/*Book  ----------------------------->*/
 .booking-text {
     background-color: #D9D9D9;
     padding: 2%;
@@ -172,6 +172,39 @@ label {
     padding: 3% 9% 3% 9%;
     border-radius: 0.4rem;
     font-size: medium;
+}
+
+
+/*Prices  ----------------------------->*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #9AB0C3;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #a0a0a09a;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #9AB0C3;
 }
 
 /*Footer ----------------------------->*/
@@ -267,6 +300,12 @@ footer {
 
     input {
         width: 30%;
+    }
+
+    /*Prices*/
+    .table-container {
+        display: flex;
+        justify-content: center;
     }
 
     /*Modal*/
@@ -377,7 +416,11 @@ footer {
         width: 100%;
     }
 
-    
+    /*Prices*/
+    .table-container {
+        display: flex;
+        justify-content: center;
+    }
 
     /*Modal*/
     .modal-btn {
@@ -509,6 +552,11 @@ footer {
     }
 
     .time-btn {
+        width: 100%;
+    }
+
+    /*Prices*/
+    .styled-table {
         width: 100%;
     }
 
