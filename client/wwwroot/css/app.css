@@ -46,6 +46,10 @@ body {
 
 /* Main -----------------------------> */
 
+.info-section, 
+.services-section {
+    padding: 2rem;
+}
 
 .services-section {
     background-color: #AEC6CF;
@@ -56,14 +60,11 @@ body {
     row-gap: 50%;
     flex-direction: column;
     align-items: center;
+    margin: 2% 0 5% 0 ;
 }
 
 .icon-container p {
     text-align: center;
-}
-
-p {
-    margin: 0 5% 4% 5%;
 }
 
 .image-container {
@@ -78,6 +79,29 @@ p {
 a:link, 
 a:visited {
     color: black;
+}
+
+/*Felmeddelanden / bekräftelsemeddelanden*/
+.errormsg {
+    background-color: rgb(255, 103, 103);
+    font-weight: bold;
+    color: rgb(161, 0, 0);
+    border: solid red 1px;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    width: 60%;
+    text-align: center;
+}
+
+.succmsg {
+    background-color: rgb(0, 182, 0);
+    font-weight: bold;
+    color: rgb(0, 43, 0);
+    border: solid green 1px;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    width: 60%;
+    text-align: center;
 }
 
 /*Treatments ----------------------------->*/
@@ -272,7 +296,11 @@ footer {
         width: 70%;
     }
 
-    /* Main */
+    /* main */
+    .info-section {
+        text-align: center;
+    }
+
     .icon-container {
         flex-direction: row;
         justify-content: center;
@@ -352,9 +380,10 @@ footer {
     }
 
     /* Main - startsida */
-    main {
+    body main.main-content {
         margin: 0 auto;
         max-width: 50%;
+        overflow-x: auto !important;
     }
     
     section {
@@ -478,11 +507,10 @@ footer {
     .nav-list {
         column-gap: 0.3rem;
         font-size: large;
-        font-weight: bold;
     }
 
     /* Main - startsida */
-    main {
+    .main-content {
         margin: 0 auto;
         max-width: 50%;
     }
