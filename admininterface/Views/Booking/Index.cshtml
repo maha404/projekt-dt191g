@@ -1,15 +1,18 @@
 @model IEnumerable<admininterface.Models.BookingModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bokningar";
 }
 
-<h1>Index</h1>
+<h1>Bokningar</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Lägg till bokning</a>
 </p>
-<table class="table">
+
+
+<div class="table-responsive">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -49,11 +52,12 @@
                 @Html.DisplayFor(modelItem => item.Treatment.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Ändra</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-circle-info"></i> Info</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Radera</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

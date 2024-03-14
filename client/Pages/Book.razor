@@ -3,6 +3,7 @@
 @inject HttpClient http
 @using System.Globalization
 
+<PageTitle>Boka</PageTitle>
 
 @if(showModal) 
 {
@@ -41,9 +42,12 @@
         <br>
             <input @bind="CustomerPhone" type="text" placeholder="Ditt telefonnummer" name="phonenumber" id="phonenumber">
         <br>
-            <p>@ErrorMessage</p>
+        @if(message)
+        {
+            <p class="errormsg">@ErrorMessage</p>
+        }
             <button @onclick="BookTreatment" class="book-btn">Boka</button>
-            <button class="book-btn">Ångra</button>
+            <button @onclick="CancelTreatment" class="book-btn">Ångra</button>
     </article>
     
 </section>
@@ -86,6 +90,7 @@
 
 @code {
     private bool showModal = false;
+    private bool message = false;
     private bool IsCurrentWeek => selectedWeek == GetIso8601WeekNumber(DateTime.Now);
 
     private Treatment treatment;
@@ -142,16 +147,19 @@
 
                 // Visa modalen
                 showModal = true;
+                message = false;
                 ErrorMessage = "";
                 
             } else {
                 ErrorMessage = "Fälten får inte vara tomma!";
+                message = true;
             }
              
         }
         catch (Exception ex)
         {
             ErrorMessage = "Vänligen välj en tid!";
+            message = true;
         }
     }
 
@@ -192,6 +200,11 @@
         }
 
         return days;
+    }
+
+    private void CancelTreatment()
+    {
+        NavManager.NavigateTo("/tidsbokning");
     }
 
 

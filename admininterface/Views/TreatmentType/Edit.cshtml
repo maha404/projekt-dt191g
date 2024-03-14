@@ -4,7 +4,7 @@
     ViewData["Title"] = "Ändra behandlingstyp";
 }
 
-<h1>Ändra</h1>
+<h1>Ändra behandlingstyp</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,6 +16,7 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
@@ -24,6 +25,6 @@
 </div>
 <br>
 <div>
-    <a asp-action="Index">Tillbaka</a>
+    <a asp-action="Index">Tillbaka till listana</a>
 </div>
 

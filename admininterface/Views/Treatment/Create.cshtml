@@ -1,12 +1,11 @@
 @model admininterface.Models.TreatmentModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Lägg till behandling";
 }
 
-<h1>Create</h1>
+<h1>Lägg till ny behandling</h1>
 
-<h4>TreatmentModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -36,14 +35,15 @@
                 <label asp-for="TreatmentTypeId" class="control-label"></label>
                 <select asp-for="TreatmentTypeId" class ="form-control" asp-items="ViewBag.TreatmentTypeId"></select>
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lägg till" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<br>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>
 

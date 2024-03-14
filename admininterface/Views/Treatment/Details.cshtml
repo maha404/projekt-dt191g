@@ -1,13 +1,13 @@
 @model admininterface.Models.TreatmentModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Info";
 }
 
-<h1>Details</h1>
+<h2>Info</h2>
 
 <div>
-    <h4>TreatmentModel</h4>
+    <h4>Info om behandling "@Html.DisplayFor(model => model.Name)"</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -43,6 +43,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Ändra</a> 
+    <br>
+    <br>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>

@@ -1,6 +1,8 @@
 @page "/priser"
 @inject HttpClient http
 
+<PageTitle>Priser</PageTitle>
+
 <h2>Priser</h2>
 
 <div>
@@ -30,12 +32,12 @@
 
 @code {
 
-    private Treatment[]? treatment;
+    private List<Treatment>? treatment;
     private List<BreadcrumbItem> NavItems1 { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        treatment = await http.GetFromJsonAsync<Treatment[]>("http://localhost:5244/api/treatments");
+        treatment = await http.GetFromJsonAsync<List<Treatment>>("http://localhost:5244/api/treatments/with-type");
         
         NavItems1 = new List<BreadcrumbItem>
         {
@@ -50,7 +52,9 @@
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public TimeSpan? TreatmentType { get; set; }
         public int Price { get; set; }
         public int TreatmentTypeId { get; set; }
+        public string TreatmentTypeName { get; set; }
     }
 }

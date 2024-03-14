@@ -7,9 +7,10 @@
 <h1>Hantera behandlingstyp</h1>
 
 <p>
-    <a asp-action="Create"> + Lägg till</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Lägg till behandling</a>
 </p>
-<table class="table">
+<div lass="table-responsive">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -25,11 +26,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Ändra</a> 
-                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> 
-                <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Ändra</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-circle-info"></i> Info</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Radera</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

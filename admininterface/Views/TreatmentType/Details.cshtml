@@ -1,23 +1,27 @@
 @model admininterface.Models.TreatmentTypeModel
 
 @{
-    ViewData["Title"] = "Detaljer";
+    ViewData["Title"] = "Info";
 }
 
-<h1>Detaljer "@Html.DisplayFor(model => model.Name)"</h1>
+<h1>Info</h1>
 
 <div>
+    <h4>Info om behandling "@Html.DisplayFor(model => model.Name)"</h4>
     <hr />
-    <ul class="row">
-        <li class = "col-sm-2">
+
+    <dl class="row">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
-        </li>
-        <li class = "col-sm-10">
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </li>
-    </ul>
-</div>
+        </dd>
+    </dl>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Ändra</a>
-    <a asp-action="Index">Tillbaka</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Ändra</a>
+    <br>
+    <br>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>

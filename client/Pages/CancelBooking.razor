@@ -14,8 +14,16 @@
 <input type="text" @bind="CustomerPhone">
 <button @onclick="Cancel">Avboka</button>
 <br>
-<p>@ErrorMessage</p>
-<p>@SuccessMessage</p>
+@if(!string.IsNullOrEmpty(SuccessMessage))
+{
+    <p class="succmsg">@SuccessMessage</p>
+}
+@if(!string.IsNullOrEmpty(ErrorMessage))
+{
+    <p class="errormsg">@ErrorMessage</p>
+}
+
+
 
 @code {
 

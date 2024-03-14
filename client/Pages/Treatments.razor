@@ -2,47 +2,51 @@
 @inject HttpClient http
 @inject NavigationManager NavManager
 
+<PageTitle>Tidsbokning</PageTitle>
+
 <div>
     <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
 </div>
 
 @if(showModal) 
 {
-    @foreach(var item in treatmentInfo)
+    @foreach(var item in treatment)
     {
         <div class="modals">
             <CustomModal Title=@item.Name Message=@($"{item.Description}") OnClose="CloseModal"/>
         </div>
     }
-    
 }
 
-@if (treatmenttype != null)
+@if (treatmentInfo != null && treatmentInfo.Any())
 {
-    foreach (var type in treatmenttype) 
+    // Gruppera behandlingarna efter behandlingstypsnamnet
+    var groupedTreatments = treatmentInfo.GroupBy(t => t.TreatmentTypeName);
+
+    @foreach (var group in groupedTreatments)
     {
-        <div>
-            <button class="collapse-btn" data-toggle="collapse" data-target="#@($"collapse-{type.Id}")" aria-expanded="false" aria-controls="@($"collapse-{type.Id}")">
-                <p>@type.Name</p>
-            </button>
-            <article class="collapse" id="@($"collapse-{type.Id}")">
-                @foreach (var item in GetTreatmentByType(type.Id))
-                {
-                    <div class="collapse-contents">
-                        <div class="text-container">
-                            <p>@item.Name</p>
-                            <p>Pris - @item.Price</p>
-                        </div>
-                        <div class="btn-container">
-                            <div class="btns">
-                            <button class="contents-btn" @onclick="() => Info(item.Id)">Mer info</button>
-                            <button class="contents-btn" @onclick="() => BookTreatment(item.Id)">Boka</button>
-                            </div>
+    <div>
+        <button class="collapse-btn" data-toggle="collapse" data-target="#@($"collapse-{group.Key}")" aria-expanded="false" aria-controls="@($"collapse-{group.Key}")">
+            <p>@group.Key</p>
+        </button>
+        <article class="collapse" id="@($"collapse-{group.Key}")">
+            @foreach (var treatment in group)
+            {
+                <div class="collapse-contents">
+                    <div class="text-container">
+                        <p>@treatment.Name</p>
+                        <p>Pris - @treatment.Price kr</p>
+                    </div>
+                    <div class="btn-container">
+                        <div class="btns">
+                            <button class="contents-btn" @onclick="() => Info(treatment.Id)">Mer info</button>
+                            <button class="contents-btn" @onclick="() => BookTreatment(treatment.Id)">Boka</button>
                         </div>
                     </div>
-                }
-            </article>
-        </div>
+                </div>
+            }
+        </article>
+    </div>
     }
 }
 
@@ -50,17 +54,17 @@
 @code {
 
     private bool showModal = false;
-    private Treatment[]? treatment;
-    private TreatmentType[]? treatmenttype;
-    private Treatment[]? treatmentInfo;
+   
+
+    private List<Treatment>? treatmentInfo;
+    private SingleTreatment[]? treatment;
+
     private List<BreadcrumbItem> NavItems1 { get; set; }
 
-    // Kör denna metod när komponenten laddas
     protected override async Task OnInitializedAsync()
     {
-        // Anropa API för att hämta behandlingar
-        treatment = await http.GetFromJsonAsync<Treatment[]>("http://localhost:5244/api/treatments");
-        treatmenttype = await http.GetFromJsonAsync<TreatmentType[]>("http://localhost:5244/api/treatmenttypes");
+        // Hämta datan från API:t
+        treatmentInfo = await http.GetFromJsonAsync<List<Treatment>>("http://localhost:5244/api/treatments/with-type");
         
         NavItems1 = new List<BreadcrumbItem>
         {
@@ -69,14 +73,7 @@
         };
     }
 
-    
-    // Metod för att filtrera behandlingar baserat på behandlingstyp
-    private IEnumerable<Treatment> GetTreatmentByType(int treatmentTypeId)
-    {
-        return treatment?.Where(t => t.TreatmentTypeId == treatmentTypeId) ?? Enumerable.Empty<Treatment>();
-    }
-
-    private void BookTreatment (int id)
+    private void BookTreatment(int id)
     {
         // Skapa en query-string med behandlings-ID
         var queryString = $"id={id}";
@@ -86,11 +83,10 @@
     }
 
    private async Task Info(int id)
-    {
-        treatmentInfo = new Treatment[] { await http.GetFromJsonAsync<Treatment>($"http://localhost:5244/api/treatments/{id}") };
-        showModal = true;
-    }
-
+   {
+     treatment = new SingleTreatment [] { await http.GetFromJsonAsync<SingleTreatment>($"http://localhost:5244/api/treatments/{id}") };
+     showModal = true;
+   }
 
     private void CloseModal()
     {
@@ -102,14 +98,20 @@
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public TimeSpan? TreatmentType { get; set; }
         public int Price { get; set; }
         public int TreatmentTypeId { get; set; }
+        public string TreatmentTypeName { get; set; }
     }
 
-    public class TreatmentType
+    public class SingleTreatment
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Price { get; set; }
+        public int TreatmentTypeId { get; set; }
+        public string TreatmentTypeName { get; set; }
     }
 
 }
