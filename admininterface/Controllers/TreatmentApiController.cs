@@ -16,19 +16,32 @@ namespace MyApp.Namespace
             _context = context;
         }
 
-        // GET: api/treatments
-        // Get all treatments
-        [HttpGet]
-        public async Task<IActionResult> GetTreatment() 
+        // GET: api/treatments/with-type
+        [HttpGet("with-type")]
+public async Task<IActionResult> GetTreatmentsWithType() 
+{
+    var treatmentsWithTypeName = await _context.Treatments
+        .Include(t => t.TreatmentType)
+        .Select(t => new 
         {
+            t.Id,
+            t.Name,
+            t.Description,
+            t.TreatmentTime,
+            t.Price,
+            t.TreatmentTypeId,
+            TreatmentTypeName = t.TreatmentType.Name // Lägg till namnet på behandlingstypen
+        })
+        .ToListAsync();
 
-            if(_context.Treatments == null)
-            {
-                return NotFound();
-            }
+    if(treatmentsWithTypeName == null || !treatmentsWithTypeName.Any())
+    {
+        return NotFound();
+    }
 
-            return Ok(await _context.Treatments.ToListAsync());
-        }
+    return Ok(treatmentsWithTypeName);
+}
+
 
         // GET api/treatments/id
         // Get specific treatment
