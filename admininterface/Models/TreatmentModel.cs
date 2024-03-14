@@ -23,6 +23,7 @@ public class TreatmentModel
     public int Price { get; set; }
 
     public ICollection<BookingModel>? Booked { get; }
+    [Display(Name = "Behandlingstyp")]
     public int TreatmentTypeId { get; set; }
     public TreatmentTypeModel? TreatmentType { get; set; }
 }
