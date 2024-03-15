@@ -3,16 +3,38 @@
 @using Newtonsoft.Json;
 @using System.Text;
 
-<h2>Avboka</h2>
+<PageTitle>Avboka</PageTitle>
+
+<div class="header-text">
+    <h1>Avboka</h1>
+</div>
 
 <div>
     <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
-</div>
+</div> 
 
-<input type="number" @bind="bookingId" placeholder="bokningsnummer">
-<input type="text" @bind="CustomerName">
-<input type="text" @bind="CustomerPhone">
-<button @onclick="Cancel">Avboka</button>
+<article class="cancel-article">
+    <h2>Avboka din behandling här</h2>
+    <p>Här kan du avboka din behandling hos oss, ange namn, telefonummer och bokningsnummer på din bokning för att avboka. Du kan även ringa till oss för att avboka din behandling genom att ringa eller kontakta oss via formuläret .</p>
+</article>
+
+<div class="cancel-container">
+<form class="form">
+    <label for="bokingnum">Bokningsnummer</label>
+    <input type="number" @bind="bookingId" placeholder="Ditt bokningsnummer">
+
+    <br>
+    <label for="">Namn på bokningen</label>
+    <input type="text" @bind="CustomerName">
+    <br>
+    <br>
+    <label for="">Telefonnummret på bokningen</label>
+    <input type="text" @bind="CustomerPhone">
+    <br>
+    <br>
+</form>
+<br>
+<button @onclick="Cancel" class="cancel-btn">Avboka</button>
 <br>
 @if(!string.IsNullOrEmpty(SuccessMessage))
 {
@@ -22,7 +44,7 @@
 {
     <p class="errormsg">@ErrorMessage</p>
 }
-
+</div>
 
 
 @code {

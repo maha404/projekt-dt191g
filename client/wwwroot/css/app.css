@@ -242,6 +242,54 @@ label {
     padding: 1rem;
 }
 
+/*CancelBooking ----------------------------->*/
+.cancel-container {
+    margin: 0 auto;
+}
+.cancel-article {
+    background-color: rgba(204, 204, 204, 0.445);
+    padding: 0.5rem;
+    margin: 2rem 0 2rem 0;
+}
+
+.form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #9AB0C3;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.cancel-btn {
+    background-color: #9AB0C3;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
 /*Footer ----------------------------->*/
 footer {
     margin-top: auto;
@@ -305,6 +353,18 @@ footer {
         width: 70%;
     }
 
+    /*Header*/
+    .header-text {
+        position: absolute;
+        top: 12rem;
+        left: 48rem;
+        color: white; 
+    }
+
+    .header-text h1 {
+        font-size: 6rem;
+    }
+
     /* main */
     .info-section {
         text-align: center;
@@ -353,6 +413,11 @@ footer {
     .third-article-img {
         width: 50%;
         margin: 0 auto;
+    }
+
+    /*Cancel*/
+    .cancel-btn {
+        margin-left: 11rem;
     }
 
     /*Modal*/
@@ -487,6 +552,11 @@ footer {
         margin: 0 auto;
     }
 
+    /*Cancel*/
+    .cancel-btn {
+        margin-left: 4rem;
+    }
+
     /*Modal*/
     .modal-btn {
         padding: 1% 0 1% 0;
@@ -537,6 +607,17 @@ footer {
     .nav-list {
         column-gap: 0.3rem;
         font-size: large;
+    }
+
+    .header-text {
+        position: absolute;
+        top: 12rem;
+        left: 48rem;
+        color: white; 
+    }
+
+    .header-text h1 {
+        font-size: 6rem;
     }
 
     /* Main - startsida */
@@ -642,6 +723,11 @@ footer {
     .third-article-img {
         width: 30%;
         margin: 0 auto;
+    }
+
+    /*Cancel*/
+    .cancel-btn {
+        margin-left: 17rem;
     }
 
     /*Modal*/
