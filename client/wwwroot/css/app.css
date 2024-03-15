@@ -233,6 +233,15 @@ label {
     border-bottom: 2px solid #9AB0C3;
 }
 
+/*About ----------------------------->*/
+.first-article, 
+.second-article, 
+.third-article {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
 /*Footer ----------------------------->*/
 footer {
     margin-top: auto;
@@ -335,6 +344,15 @@ footer {
     .table-container {
         display: flex;
         justify-content: center;
+    }
+
+    /*About*/
+   
+    .first-article-img, 
+    .second-article-img, 
+    .third-article-img {
+        width: 50%;
+        margin: 0 auto;
     }
 
     /*Modal*/
@@ -455,6 +473,18 @@ footer {
     .table-container {
         display: flex;
         justify-content: center;
+    }
+
+    /*About*/
+    .first-article-img{
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .second-article-img, 
+    .third-article-img {
+        width: 40%;
+        margin: 0 auto;
     }
 
     /*Modal*/
@@ -596,6 +626,22 @@ footer {
     /*Prices*/
     .styled-table {
         width: 100%;
+    }
+
+    /*About*/
+    .first-article-img{
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .second-article-img {
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    .third-article-img {
+        width: 30%;
+        margin: 0 auto;
     }
 
     /*Modal*/
