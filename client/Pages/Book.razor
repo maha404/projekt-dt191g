@@ -16,7 +16,7 @@
     <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
 </div>
 
-<section>
+
     @if(treatment != null)
     {
         <article class="booking-text">
@@ -34,11 +34,11 @@
             <p>Datum och tid för bokningen: @selectedDate.ToString("yyyy-MM-dd") @selectedTime </p>
         }
         <br>
-            <label for="name">Namn</label>
+            <label asp-for="name">Namn</label>
         <br>
             <input @bind="CustomerName" type="text" placeholder="Ditt namn" name="name" id="name">
         <br>
-            <label for="phonenumber">Telefonnummer</label>
+            <label asp-for="phonenumber">Telefonnummer</label>
         <br>
             <input @bind="CustomerPhone" type="text" placeholder="Ditt telefonnummer" name="phonenumber" id="phonenumber">
         <br>
@@ -50,7 +50,6 @@
             <button @onclick="CancelTreatment" class="book-btn">Ångra</button>
     </article>
     
-</section>
 <br>
 
 
@@ -187,12 +186,11 @@
         DateTime jan1 = new DateTime(year, 1, 1);
         DateTime startOfWeek = jan1.AddDays((weekNumber - 1) * 7 - (int)jan1.DayOfWeek + (int)DayOfWeek.Monday);
 
-        DateTime[] days = new DateTime[5]; // Adjust to 5 to include only weekdays (Monday to Friday)
+        DateTime[] days = new DateTime[5];
         for (int i = 0; i < 5; i++)
         {
             DateTime currentDay = startOfWeek.AddDays(i);
 
-            // Check if the current day is a weekend (Saturday or Sunday)
             if (currentDay.DayOfWeek != DayOfWeek.Saturday && currentDay.DayOfWeek != DayOfWeek.Sunday)
             {
                 days[i] = currentDay;

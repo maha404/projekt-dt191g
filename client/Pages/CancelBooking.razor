@@ -15,21 +15,20 @@
 
 <article class="cancel-article">
     <h2>Avboka din behandling här</h2>
-    <p>Här kan du avboka din behandling hos oss, ange namn, telefonummer och bokningsnummer på din bokning för att avboka. Du kan även ringa till oss för att avboka din behandling genom att ringa eller kontakta oss via formuläret .</p>
+    <p>Här kan du avboka din behandling hos oss, ange namn, telefonummer och bokningsnummer på din bokning för att avboka.</p>
 </article>
 
 <div class="cancel-container">
 <form class="form">
     <label for="bokingnum">Bokningsnummer</label>
-    <input type="number" @bind="bookingId" placeholder="Ditt bokningsnummer">
-
+    <input id="bokingnum" type="number" @bind="bookingId" placeholder="Ditt bokningsnummer">
     <br>
-    <label for="">Namn på bokningen</label>
-    <input type="text" @bind="CustomerName">
+    <label for="name">Namn på bokningen</label>
+    <input id="name" type="text" @bind="CustomerName">
     <br>
     <br>
-    <label for="">Telefonnummret på bokningen</label>
-    <input type="text" @bind="CustomerPhone">
+    <label for="phonenum">Telefonnummret på bokningen</label>
+    <input id="phonenum" type="text" @bind="CustomerPhone">
     <br>
     <br>
 </form>

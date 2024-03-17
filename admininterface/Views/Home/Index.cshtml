@@ -1,7 +1,17 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Logga in";
 }
 
 <div class="text-center">
+    @if(SignInManager.IsSignedIn(User))
+    {
+        <h1>Välkommen @User.Identity?.Name!</h1>
+    } else {
+        <partial name="_LoginPartial" />
+    }
     
 </div>

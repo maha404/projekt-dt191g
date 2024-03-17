@@ -4,6 +4,12 @@
 
 <PageTitle>Tidsbokning</PageTitle>
 
+
+<div class="header-text">
+    <h1>Tidsbokning</h1>
+</div>
+
+
 <div>
     <Breadcrumb style="--bs-breadcrumb-divider: '>';" Items="NavItems1"></Breadcrumb>
 </div>
@@ -27,14 +33,14 @@
     {
     <div>
         <button class="collapse-btn" data-toggle="collapse" data-target="#@($"collapse-{group.Key}")" aria-expanded="false" aria-controls="@($"collapse-{group.Key}")">
-            <p>@group.Key</p>
+            @group.Key
         </button>
         <article class="collapse" id="@($"collapse-{group.Key}")">
             @foreach (var treatment in group)
             {
                 <div class="collapse-contents">
                     <div class="text-container">
-                        <p>@treatment.Name</p>
+                        <h2 class="collapse-header">@treatment.Name</h2>
                         <p>Pris - @treatment.Price kr</p>
                     </div>
                     <div class="btn-container">
