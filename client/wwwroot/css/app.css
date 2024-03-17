@@ -133,6 +133,10 @@ a:visited {
     font-size: small;
 }
 
+.collapse-header {
+    font-size: medium;
+}
+
 /*Book  ----------------------------->*/
 .booking-text {
     background-color: #D9D9D9;
@@ -212,7 +216,6 @@ label {
 
 .styled-table thead tr {
     background-color: #9AB0C3;
-    color: white;
     text-align: left;
 }
 
@@ -226,7 +229,7 @@ label {
 }
 
 .styled-table tbody tr:nth-child(even) {
-    background-color: #a0a0a09a;
+    background-color: #cfcfcf9a;
 }
 
 .styled-table tbody tr:last-of-type {
@@ -600,7 +603,7 @@ footer {
         align-items: center;
         margin: 0 auto;
         max-width: 50%;
-        column-gap: 35%;
+        column-gap: 30%;
         padding: 0.5% 0 0.5% 0;
     }
 
@@ -641,6 +644,10 @@ footer {
 
     .image-container {
         display: block;
+    }
+
+    .services-img {
+        padding: 2%;
     }
 
     .icon-container {
