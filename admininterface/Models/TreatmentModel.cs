@@ -25,5 +25,6 @@ public class TreatmentModel
     public ICollection<BookingModel>? Booked { get; }
     [Display(Name = "Behandlingstyp")]
     public int TreatmentTypeId { get; set; }
+    [Display(Name = "Behandlingstyp")]
     public TreatmentTypeModel? TreatmentType { get; set; }
 }
