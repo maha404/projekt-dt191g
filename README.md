@@ -12,8 +12,10 @@ Projektet är uppdelat och består av ett admingränsnitt som kan göra ändring
 + Användare av webbplatsen kan boka en behandling och se priser på behandlingarna.
 
 ### :wrench: Teknologier och Verktyg 
-**ASP.NET**: Används för uppbyggnad av admingränssnittet. 
+**ASP.NET**: Används för uppbyggnad av admingränssnittet.
+
 **API**: Ett API har skapats för att kunna kommunicera mellan frontend och backend. 
+
 **Blazor WebAssembly**: Används för den publika webbplatsen. 
 
 ### :file_folder: Struktur 
