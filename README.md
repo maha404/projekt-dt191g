@@ -1,4 +1,4 @@
-# Projekt DT068G - Hudiksvalls djurklinik
+# Projekt DT191G - Hudiksvalls djurklinik
 
 ### Välkommen till mitt projekt i kursen DT191G :wave:
 Detta projekt skapades som avslutande projekt i kursen DT191G vid Mittuniversitetet.
